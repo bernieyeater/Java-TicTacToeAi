@@ -35,7 +35,7 @@ public class TicTacToe implements ActionListener{
 			textfield.setForeground(new Color(25,255,0));
 			textfield.setFont(new Font("Ink Free",Font.BOLD,75));
 			textfield.setHorizontalAlignment(JLabel.CENTER);
-			textfield.setText("Tic-Tac-Toe");
+			textfield.setText("Tic-Tac-Toe AI");
 			textfield.setOpaque(true);
 			
 			title_panel.setLayout(new BorderLayout());
@@ -69,7 +69,7 @@ public class TicTacToe implements ActionListener{
 							buttons[i].setForeground(new Color(255,0,0));
 							buttons[i].setText("X");
 							player1_turn=false;
-							textfield.setText("O turn");
+							//textfield.setText("O turn");
 							check();
 						}
 					}
@@ -78,30 +78,156 @@ public class TicTacToe implements ActionListener{
 							buttons[i].setForeground(new Color(0,0,255));
 							buttons[i].setText("O");
 							player1_turn=true;
-							textfield.setText("X turn");
+							//textfield.setText("X turn");
+							xTurn();
 							check();
+
 						}
 					}
 				}			
 			}
 		}
+
+		
+
+		
+		public void xTurn() {
+			//X winning moves 
+			//Horizontal Top
+			xBestMove(0,"X",1,"X",2,"",2);
+			xBestMove(0,"X",1,"",2,"X",1);		
+			xBestMove(0,"",1,"X",2,"X",0);		
+			//Horizontal Middle
+			xBestMove(3,"X",4,"X",5,"",5);	
+			xBestMove(3,"X",4,"",5,"X",4);	
+			xBestMove(3,"",4,"X",5,"X",3);	
+			//Horizontal Bottom
+			xBestMove(6,"X",7,"X",8,"",8);		
+			xBestMove(6,"X",7,"",8,"X",7);				
+			xBestMove(6,"",7,"X",8,"X",6);	
+			//Vertical Left
+			xBestMove(0,"",3,"X",6,"X",0);
+			xBestMove(0,"X",3,"",6,"X",3);
+			xBestMove(0,"X",3,"X",6,"",6);
+			//Vertical Middle
+			xBestMove(1,"",4,"X",7,"X",1);
+			xBestMove(1,"X",4,"",7,"X",4);
+			xBestMove(1,"X",4,"X",7,"",7);
+			//Vertical Right
+			xBestMove(2,"",5,"X",8,"X",2);
+			xBestMove(2,"X",5,"",8,"X",5);
+			xBestMove(2,"X",5,"X",8,"",8);
+			//Left Diagonal
+			xBestMove(0,"X",4,"X",8,"",8);
+			xBestMove(0,"",4,"X",8,"X",0);
+			xBestMove(0,"X",4,"",8,"X",4);
+			//Right Diagonal
+			xBestMove(6,"X",4,"X",2,"",2);
+			xBestMove(6,"X",4,"",2,"X",4);		
+			xBestMove(6,"",4,"X",2,"X",6);
+			
+			//O defense 
+			//Top Row Horizontal
+			xBestMove(0,"O",1,"O",2,"",2);
+			xBestMove(0,"",1,"O",2,"O",0);			
+			xBestMove(0,"O",1,"",2,"O",1);	
+			//Middle Row Horizontal
+			xBestMove(3,"O",4,"O",5,"",5);
+			xBestMove(3,"",4,"O",5,"O",3);
+			xBestMove(3,"O",4,"",5,"O",4);			
+			//Bottom Row Horizontal
+			xBestMove(6,"O",7,"O",8,"",8);
+			xBestMove(6,"",7,"O",8,"O",6);	
+			xBestMove(6,"O",7,"",8,"O",7);				
+			//Left Row Vertical
+			xBestMove(0,"O",3,"O",6,"",6);
+			xBestMove(0,"",3,"O",6,"O",0);
+			xBestMove(0,"O",3,"",6,"O",3);
+			//Middle Row Vertical
+			xBestMove(1,"O",4,"O",7,"",7);
+			xBestMove(1,"",4,"O",7,"O",2);
+			xBestMove(1,"O",4,"",7,"O",4);
+			//Right Row Vertical
+			xBestMove(2,"O",5,"O",8,"",8);
+			xBestMove(2,"",5,"O",8,"O",2);
+			xBestMove(2,"O",5,"",8,"O",5);
+			//Left Diagonal
+			xBestMove(0,"O",4,"O",8,"",8);
+			xBestMove(0,"",4,"O",8,"O",0);
+			xBestMove(0,"O",4,"",8,"O",4);
+			//Right Diagonal
+			xBestMove(6,"O",4,"O",2,"",2);
+			xBestMove(6,"O",4,"",2,"O",4);		
+			xBestMove(6,"",4,"O",2,"O",6);			
+			
+			//X offense clear path to win
+			//Top Row Horizontal
+			xBestMove(0,"",1,"",2,"",0);
+			xBestMove(0,"X",1,"",2,"",1);	
+			xBestMove(0,"",1,"",2,"X",1);	
+			//Middle Row Horizontal
+			xBestMove(3,"",4,"",5,"",3);
+			xBestMove(3,"X",4,"",5,"",4);	
+			xBestMove(3,"",4,"",5,"X",4);
+			//Bottom Row Horizontal
+			xBestMove(6,"",7,"",8,"",6);
+			xBestMove(6,"X",7,"",8,"",7);	
+			xBestMove(6,"",7,"",8,"X",7);
+			//Vertical Left
+			xBestMove(0,"X",3,"",6,"",3);
+			xBestMove(0,"",3,"X",6,"",0);
+			xBestMove(0,"",3,"",6,"X",3);
+			//Vertical Middle
+			xBestMove(1,"",4,"X",7,"",1);
+			xBestMove(1,"X",4,"",7,"",4);
+			xBestMove(1,"",4,"",7,"X",4);
+			//Vertical Right
+			xBestMove(2,"",5,"X",8,"",2);
+			xBestMove(2,"X",5,"",8,"",5);
+			xBestMove(2,"",5,"",8,"X",5);
+			//Left Diagonal
+			xBestMove(0,"",4,"X",8,"",0);
+			xBestMove(0,"X",4,"",8,"",4);
+			xBestMove(0,"",4,"",8,"X",4);
+			//Right Diagonal
+			xBestMove(6,"",4,"X",2,"",6);
+			xBestMove(6,"X",4,"",2,"",4);		
+			xBestMove(6,"",4,"",2,"X",4);
+			
+			
+			//What's left? No good moves
+			for (int x=0; x<9; x++) {
+				if (player1_turn & buttons[x].getText()=="") {
+				buttons[x].setText("X");player1_turn=false;}}
+			
+		}
+		
+		public void xBestMove(int button1, String state1, int button2, String state2, int button3, String state3, int action1) {
+			if(
+					(player1_turn & 
+					buttons[button1].getText()==state1) &&
+					(buttons[button2].getText()==state2) &&
+					(buttons[button3].getText()==state3)
+					) {
+				buttons[action1].setText("X");
+				buttons[action1].setForeground(new Color(255,0,0));
+				player1_turn=false;}
+				//textfield.setText("O turn");
+		}
 		
 		public void firstTurn() {
 			
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			sleep(2000);
 			
-			if(random.nextInt(2)==0) {
-				player1_turn=true;
-				textfield.setText("X turn");
-			}
-			else {
-				player1_turn=false;
-				textfield.setText("O turn");
+			player1_turn=false;
+
+		}
+		
+		public void sleep(int sleepy) {
+			try {
+				Thread.sleep(sleepy);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
 		}
 		
